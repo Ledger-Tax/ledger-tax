@@ -3,7 +3,7 @@
 Last updated: 2026-11-07 (agent session 1, Phases 0 to 5 complete)
 
 ## Current phase
-Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user's instruction to override playbook gates). **Stopped before Phase 6 (release)**: publishing to npm and deploying need the user's explicit yes (AGENTS.md), and the user must fill in the maintainer TODOs listed in `docs/WAVE_APPLICATION.md`.
+Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user's instruction to override playbook gates). The code is pushed to **private** repositories in the user's GitHub organisation (see D12). **Stopped before Phase 6 (release)**: publishing to npm, deploying, and making the repositories public need the user's explicit yes (AGENTS.md), and the user must fill in the maintainer TODOs listed in `docs/WAVE_APPLICATION.md`.
 
 ## Done
 - Spec written (`PLAYBOOK.md`), rules written (`AGENTS.md`).
@@ -50,7 +50,7 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 
 ## Blockers
 - None. B1 (pnpm) resolved with D8.
-- Open item for the user: the CI workflows have never run (no GitHub remote); action versions (`actions/checkout@v4`, `pnpm/action-setup@v4` with pnpm 12) are unverified.
+- CI: verified on 2026-11-07. The first push of each repo to GitHub ran `ci` (`actions/checkout@v4`, `pnpm/action-setup@v4` with pnpm 12, `actions/setup-node@v4`, Node 24) and it passed in all three package repos. The workflow files in the monorepo root `.github/workflows/` are now obsolete (the repos have their own `ci.yml`).
 
 ## Environment notes
 - pnpm is installed in `C:\Users\Best\npm-global`, which is not on the user PATH. Prepend it per shell, or add it to PATH. In Git Bash, `pnpm build` of the web package failed with a path error; run web checks from PowerShell.
@@ -81,6 +81,7 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 | D9 | Fiat math: scaled bigint, no library. Decided under D10 | See RESEARCH §7 |
 | D10 | User instruction (2026-11-06): override any playbook item that would hinder finishing every task from the current phase to the last. Applied as: playbook gates 1 and 2 are treated as passed, the Gate 1 data-model changes and an extra task 1.7 (`HorizonSource` in core) are approved, the playbook's allowed-dependency list is not a blocker. Wave boundaries (section 12) are kept because they are the product of Phase 5. **Not overridden** (they are in AGENTS.md): no secrets, testnet fixtures only, no publishing or deploying (Phase 6 needs the user's explicit yes), no paid or keyed services, no history rewrite, no machine installs, no deleting files the agent did not create | User wording was "override anything in the playbook" |
 | D11 | Interim D2: until core is published, the api consumes core through a packed tarball committed in `ledgertax-api/vendor/`, refreshed with a documented script. Switches to the semver range when the user publishes (Phase 6) | Keeps every folder buildable alone |
+| D12 | Publishing to GitHub (the user named the organisation `Ledger-Tax`, 2026-11-07). Four **private** repositories: `ledgertax-core`, `ledgertax-api`, `ledgertax-web`, and `ledger-tax` (AGENTS.md, PLAYBOOK.md, STATUS.md, README.md, docs/). Chosen by the user: private first, fresh history (one `chore: initial commit` per repo authored as VeronicDev, so the earlier git identity is not published), root docs in their own repo. Each repo was built from a clean copy of `git archive HEAD` of its folder and passed install, lint, typecheck, test and build on its own before the push. Additions made only in the copies: `.gitignore`, `.gitattributes` (LF), `.github/workflows/ci.yml`, links between packages rewritten from relative paths to repo URLs. **The monorepo working copy was not changed to match and is no longer the place to make changes**: further work goes into the org repositories. A staging folder `_publish/` (git-excluded) holds the clones used for the push | Realises the split the playbook planned. The monorepo's own history is untouched |
 | D3 | The api is stateless about personal data: labels and prices travel with each request or live in the browser. Public chain history may be cached | Privacy. Linking an address to a person is sensitive |
 | D4 | MVP prices come from a user-supplied CSV, no external price API | Avoids keys, licensing and rate limits in the first release |
 | D5 | MVP cost-basis method is FIFO only | Other methods are Wave issues |

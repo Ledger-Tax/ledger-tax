@@ -12,17 +12,17 @@ This is a checklist **for you**. The agent does not apply to anything on your be
 
 ## Before you split the monorepo
 
-- [ ] Decide the final repository names and the npm scope for core (the api depends on a package named `ledgertax-core`; a scope may change the name).
+- [x] Repository names: done, `ledgertax-core`, `ledgertax-api`, `ledgertax-web` and `ledger-tax` (root docs) in the `Ledger-Tax` organisation, **private**. Still open: the npm scope for core (the api depends on a package named `ledgertax-core`; a scope may change the name).
 - [ ] **Publish `ledgertax-core` to npm** (your explicit decision; nothing has been published). Then in `ledgertax-api` replace the `file:vendor/...` dependency by a semver range, delete `vendor/` and `scripts/refresh-core.mjs`, run `pnpm install`, and update its README's last section.
-- [ ] Move each package's CI workflow out of the monorepo root: `.github/workflows/ledgertax-<name>.yml` becomes `.github/workflows/ci.yml` inside that repository, and the `working-directory` line and the `paths` filter are removed. **The workflows have never run**; the action versions (`actions/checkout@v4`, `pnpm/action-setup@v4` with `version: 12`, `actions/setup-node@v4`) are unverified. Push a branch and make sure they pass in every repository.
+- [x] Each repository has its own `.github/workflows/ci.yml`. **Verified on 2026-11-07: the first run passed in all three package repositories** (so `actions/checkout@v4`, `pnpm/action-setup@v4` with `version: 12` and `actions/setup-node@v4` work). The old workflow files in the monorepo root are obsolete.
 - [ ] In `ledgertax-web`, `scripts/refresh-openapi.mjs` only works inside the monorepo. Delete it after the split, and document where to get `openapi.yaml` (the api repository's release or raw file).
-- [ ] Decide what to do about history: the first four commits carry an earlier git identity (see `STATUS.md`). Splitting with history preserved is your call and touches git history; the agent did not do it.
+- [x] History: the repositories start with one fresh commit authored as VeronicDev, so the earlier git identity was not published. (Decided by you on 2026-11-07.)
 - [ ] Remove or keep `docs/demo-output/` and `docs/screenshots/` (public testnet data) as you prefer.
 
 ## For each of the three repositories
 
 - [ ] **README** with what it is, "Accounting export, not tax advice.", and only what is implemented and tested. (Each package README was checked against the code on 2026-11-07; re-read it after the split.)
-- [ ] **Passing CI** on the default branch (see above: never run yet).
+- [x] **Passing CI** on the default branch: yes for all three on 2026-11-07. Re-check after every change.
 - [ ] **Licence**: MIT is in each package (`LICENSE`, copyright "Stellar Ledger Tax contributors"). Change the holder if you want a name.
 - [ ] **CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md, issue templates, PR template**: present. **Fill in the two `TODO(maintainer)` lines** (a private way to report vulnerabilities, and a contact for conduct reports) before the repository is public. The agent cannot invent a contact for you.
 - [ ] **4 to 6 scoped issues** created from `docs/wave-issues/<package>.md`: core has 5, api has 5, web has 4. Create them in the repository and label them. Each names a marker you can find with `git grep "WAVE-ISSUE"`.
