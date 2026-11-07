@@ -19,6 +19,8 @@ This is a checklist **for you**. The agent does not apply to anything on your be
 - [x] History: the repositories start with one fresh commit authored as VeronicDev, so the earlier git identity was not published. (Decided by you on 2026-11-07.)
 - [ ] Remove or keep `docs/demo-output/` and `docs/screenshots/` (public testnet data) as you prefer.
 
+- [x] Repositories public (2026-11-07), with a ruleset on `main` (pull request plus passing CI) and private vulnerability reporting on. `docs/demo-output/` and `docs/screenshots/` kept.
+
 ## For each of the three repositories
 
 - [ ] **README** with what it is, "Accounting export, not tax advice.", and only what is implemented and tested. (Each package README was checked against the code on 2026-11-07; re-read it after the split.)

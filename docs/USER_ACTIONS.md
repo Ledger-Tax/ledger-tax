@@ -14,7 +14,11 @@ The four repositories are cloned locally in `_publish/` inside the monorepo fold
 
 Both contacts are chrisjacobs2468@gmail.com, in `SECURITY.md` and `CODE_OF_CONDUCT.md` of each package repository. `SECURITY.md` also points to GitHub's private vulnerability reporting; turn it on after step 2 in each repository's security settings, or tell the agent to.
 
-## 2. Make the repositories public
+## 2. Make the repositories public: done (2026-11-07)
+
+All four repositories are public; `docs/demo-output/` and `docs/screenshots/` stay (your decision). In the three package repositories the ruleset is active (changes to `main` only through a pull request whose `check` job passed; no force-push, no deletion) and private vulnerability reporting is on. **Still for you:** the fork pull request approval setting in the last bullet below; the agent was not permitted to change organisation settings.
+
+What this step asked for:
 
 Wave needs public repositories. Do this after step 1. Also decide whether `docs/demo-output/` and `docs/screenshots/` (public testnet data) stay in `ledger-tax`.
 
