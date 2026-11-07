@@ -26,6 +26,8 @@ Wave needs public repositories. Do this after step 1. Also decide whether `docs/
 
 - On GitHub: each repository, then **Settings**, **General**, **Danger Zone**, **Change visibility**. Read [GitHub's note on the consequences](https://gh.io/setting-repository-visibility) first.
 - Or tell the agent: "make the repos public". It runs `gh repo edit Ledger-Tax/<repo> --visibility public --accept-visibility-change-consequences` for `ledgertax-core`, `ledgertax-api`, `ledgertax-web` and `ledger-tax`.
+- Right after that, the agent turns on the branch rule in `docs/github-ruleset-main.json` for the three package repositories (`gh api -X POST repos/Ledger-Tax/<repo>/rulesets --input docs/github-ruleset-main.json`): changes to `main` only through a pull request whose `check` CI job passed, no force-push, no deletion. GitHub refuses this rule on private repositories of a free organisation, which is why it waits for this step.
+- Recommended on GitHub: organisation **Settings**, **Actions**, **General**, "Approval for running fork pull request workflows": choose approval for all outside collaborators, so a stranger's pull request cannot run code in CI until you have read it.
 
 ## 3. Wave issues
 
