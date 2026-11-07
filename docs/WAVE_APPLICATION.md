@@ -24,7 +24,7 @@ This is a checklist **for you**. The agent does not apply to anything on your be
 - [ ] **README** with what it is, "Accounting export, not tax advice.", and only what is implemented and tested. (Each package README was checked against the code on 2026-11-07; re-read it after the split.)
 - [x] **Passing CI** on the default branch: yes for all three on 2026-11-07. Re-check after every change.
 - [ ] **Licence**: MIT is in each package (`LICENSE`, copyright "Stellar Ledger Tax contributors"). Change the holder if you want a name.
-- [ ] **CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md, issue templates, PR template**: present. **Fill in the two `TODO(maintainer)` lines** (a private way to report vulnerabilities, and a contact for conduct reports) before the repository is public. The agent cannot invent a contact for you.
+- [x] **CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md, issue templates, PR template**: present. Security and conduct contact filled in on 2026-11-07 (chrisjacobs2468@gmail.com).
 - [ ] **4 to 6 scoped issues** created from `docs/wave-issues/<package>.md`: core has 5, api has 5, web has 4. Create them in the repository and label them. Each names a marker you can find with `git grep "WAVE-ISSUE"`.
 - [ ] **Clear scope per repository**: core classifies, api calculates and serves, web is the interface (the dependency direction is core, then api, then web).
 - [ ] No secrets in any history: search for `S` followed by 55 base32 characters, `.env` files and key files before publishing. (None were committed; `.env.example` files have empty values.)

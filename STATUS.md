@@ -3,7 +3,7 @@
 Last updated: 2026-11-07 (Phases 0 to 5 complete; Phase 6: core published to npm)
 
 ## Current phase
-Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user's instruction to override playbook gates). The code is in **private** repositories in the user's GitHub organisation (D12). **Phase 6 in progress:** core is published to npm as `@veronicdev/ledgertax-core` 0.1.0 and the api depends on it (D13). Waiting for the user, all listed in `docs/USER_ACTIONS.md`: a host and accounts for deploying the api and web app, the maintainer contacts, and the go-ahead to make the repositories public.
+Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user's instruction to override playbook gates). The code is in **private** repositories in the user's GitHub organisation (D12). **Phase 6 in progress:** core is published to npm as `@veronicdev/ledgertax-core` 0.1.0 and the api depends on it (D13). Maintainer contacts filled in (chrisjacobs2468@gmail.com, chosen by the user). Waiting for the user, all listed in `docs/USER_ACTIONS.md`: the go-ahead to make the repositories public, then the Wave issues, and a host and accounts for deploying.
 
 ## Done
 - Spec written (`PLAYBOOK.md`), rules written (`AGENTS.md`).

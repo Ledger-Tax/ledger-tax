@@ -10,15 +10,9 @@ The four repositories are cloned locally in `_publish/` inside the monorepo fold
 
 - [x] npm: logged in as `veronicdev`, 2FA enabled, `@veronicdev/ledgertax-core` 0.1.0 published (2026-11-07).
 
-## 1. Maintainer contacts (before going public)
+## 1. Maintainer contacts: done (2026-11-07)
 
-Six lines say `TODO(maintainer)`: line 21 of `SECURITY.md` and line 20 of `CODE_OF_CONDUCT.md`, in each of `ledgertax-core`, `ledgertax-api` and `ledgertax-web`.
-
-- Decide on a private way to report vulnerabilities: an email address you watch, or GitHub's private vulnerability reporting if your repository settings offer it.
-- Decide on a contact for conduct reports (it can be the same address).
-- Whatever you choose becomes public with the repositories.
-
-Tell the agent: "security contact: ..., conduct contact: ...". The agent fills in all six lines, runs the checks and pushes.
+Both contacts are chrisjacobs2468@gmail.com, in `SECURITY.md` and `CODE_OF_CONDUCT.md` of each package repository. `SECURITY.md` also points to GitHub's private vulnerability reporting; turn it on after step 2 in each repository's security settings, or tell the agent to.
 
 ## 2. Make the repositories public
 
