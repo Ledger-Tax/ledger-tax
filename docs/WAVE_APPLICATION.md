@@ -12,10 +12,10 @@ This is a checklist **for you**. The agent does not apply to anything on your be
 
 ## Before you split the monorepo
 
-- [x] Repository names: done, `ledgertax-core`, `ledgertax-api`, `ledgertax-web` and `ledger-tax` (root docs) in the `Ledger-Tax` organisation, **private**. Still open: the npm scope for core (the api depends on a package named `ledgertax-core`; a scope may change the name).
-- [ ] **Publish `ledgertax-core` to npm** (your explicit decision; nothing has been published). Then in `ledgertax-api` replace the `file:vendor/...` dependency by a semver range, delete `vendor/` and `scripts/refresh-core.mjs`, run `pnpm install`, and update its README's last section.
+- [x] Repository names: done, `ledgertax-core`, `ledgertax-api`, `ledgertax-web` and `ledger-tax` (root docs) in the `Ledger-Tax` organisation, **private**. npm name: `@veronicdev/ledgertax-core` (chosen by you on 2026-11-07).
+- [x] **Publish `ledgertax-core` to npm**: done on 2026-11-07 (0.1.0, tagged `v0.1.0` in the repository). The api depends on `^0.1.0`; `vendor/` and `scripts/refresh-core.mjs` are deleted; CI passed.
 - [x] Each repository has its own `.github/workflows/ci.yml`. **Verified on 2026-11-07: the first run passed in all three package repositories** (so `actions/checkout@v4`, `pnpm/action-setup@v4` with `version: 12` and `actions/setup-node@v4` work). The old workflow files in the monorepo root are obsolete.
-- [ ] In `ledgertax-web`, `scripts/refresh-openapi.mjs` only works inside the monorepo. Delete it after the split, and document where to get `openapi.yaml` (the api repository's release or raw file).
+- [x] In `ledgertax-web`, the monorepo-only `scripts/refresh-openapi.mjs` is deleted and the README says to copy `openapi.yaml` from the api repository (done on 2026-11-07).
 - [x] History: the repositories start with one fresh commit authored as VeronicDev, so the earlier git identity was not published. (Decided by you on 2026-11-07.)
 - [ ] Remove or keep `docs/demo-output/` and `docs/screenshots/` (public testnet data) as you prefer.
 
@@ -31,6 +31,6 @@ This is a checklist **for you**. The agent does not apply to anything on your be
 
 ## Things to be honest about when you apply
 
-- The project is early: nothing is published or deployed, and it has been verified on testnet only. The mainnet read path uses the same code but was not exercised.
+- The project is early: core is published to npm (0.1.0) but nothing is deployed, and it has been verified on testnet only. The mainnet read path uses the same code but was not exercised.
 - Classification can be wrong and history can be incomplete; both are said in the docs and in every report.
 - Liquidity pools, Soroban contract events, several addresses, other cost-basis methods, price sources and other export formats are deliberately left as the contributor issues.

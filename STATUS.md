@@ -1,9 +1,9 @@
 # STATUS
 
-Last updated: 2026-11-07 (agent session 1, Phases 0 to 5 complete)
+Last updated: 2026-11-07 (Phases 0 to 5 complete; Phase 6: core published to npm)
 
 ## Current phase
-Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user's instruction to override playbook gates). The code is pushed to **private** repositories in the user's GitHub organisation (see D12). **Stopped before Phase 6 (release)**: publishing to npm, deploying, and making the repositories public need the user's explicit yes (AGENTS.md), and the user must fill in the maintainer TODOs listed in `docs/WAVE_APPLICATION.md`.
+Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user's instruction to override playbook gates). The code is in **private** repositories in the user's GitHub organisation (D12). **Phase 6 in progress:** core is published to npm as `@veronicdev/ledgertax-core` 0.1.0 and the api depends on it (D13). Waiting for the user, all listed in `docs/USER_ACTIONS.md`: a host and accounts for deploying the api and web app, the maintainer contacts, and the go-ahead to make the repositories public.
 
 ## Done
 - Spec written (`PLAYBOOK.md`), rules written (`AGENTS.md`).
@@ -34,13 +34,18 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 - 5: per package `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue and PR templates; `docs/wave-issues/<package>.md` (core 5, api 5, web 4 issues; every marker confirmed present, none of the features exists); architecture diagram in the root README; `docs/WAVE_APPLICATION.md`.
 - Final package checks (2026-11-07): core 93 tests, api 107 tests, web 56 tests; lint, typecheck, test, build all exit 0 in each.
 
+- 6.1 publish (2026-11-07, the user said go; work in the org repositories, D12): core renamed `@veronicdev/ledgertax-core`, version 0.1.0, `private` removed, `publishConfig.access` public, `repository` set. `npm publish --dry-run` listed 9 files (`dist/`, README, LICENSE, package.json). The user ran `npm publish` (npm's 2FA confirmation happens in the user's browser; the first attempt failed with 403 until 2FA was enabled on the account). The registry's integrity hash equals the local tarball's. Core repo: tag `v0.1.0` on the published commit, `CHANGELOG.md`, README install section. Core check: 93 tests; lint, typecheck, test, build all exit 0; CI passed.
+- 6.1 api switch: `ledgertax-api` depends on `@veronicdev/ledgertax-core` `^0.1.0`; `vendor/` and `scripts/refresh-core.mjs` deleted; README and CONTRIBUTING updated. Api check from a clean install: 107 tests; lint, typecheck, test, build all exit 0; CI passed, so the package installs from npm on a clean Linux runner. The built server with the npm package ran against live testnet: `/health` ok, 34 events for the fixture account covering every event type, a secret-shaped address rejected with 400, no address in the log.
+- Post-split cleanup in `ledgertax-web`: the monorepo-only `scripts/refresh-openapi.mjs` and `pnpm api:refresh` removed; the README says to copy `openapi.yaml` from the api repository and run `pnpm gen:api` (the committed copy matches the api's spec). Web check: 56 tests; lint, typecheck, test, build all exit 0; CI passed.
+- 6.3: `docs/USER_ACTIONS.md` lists every remaining step that needs the user.
+
 ## In progress
 - Nothing.
 
 ## Next
-- Phase 6 needs the user's explicit yes for each action: 6.1 publish core (and optionally the others) to npm, then switch the api to a version range; 6.2 deploy api and web to a host the user chooses; 6.3 update each README status.
-- User tasks: fill in the two `TODO(maintainer)` lines in each package's `SECURITY.md` and `CODE_OF_CONDUCT.md`; push to a remote and confirm the CI workflows pass (they have never run); follow `docs/WAVE_APPLICATION.md`.
-- Optional: name a real public address to compare against a spreadsheet (task 4.1 second half).
+- 6.2 deploy: needs the user's choice of host and the accounts (`docs/USER_ACTIONS.md` step 4). The api README already documents its env vars, limits and `/health`; host-specific steps are written once the host is known, then the agent deploys and updates each README status.
+- User tasks in `docs/USER_ACTIONS.md`: maintainer contacts, going public, Wave issues.
+- Optional: release core 0.1.1 so the README shown on npmjs.com is current (the 0.1.0 README still says "not published"); name a real public address to compare against a spreadsheet (task 4.1 second half).
 
 ## Gate 1 items (resolved under D10; kept for the record)
 1. **Data model changes from the playbook proposal** (they need sign-off): `LedgerEvent` gained `opType?` (source operation type, always set on `unknown`) and `direction?: 'in' | 'out'` (set on `account_merged` only). The fee event has `opIndex` -1. `classifyRecord` became `classifyTransaction(records, ctx)` because merge amounts and trade fills live in effect records, so a transaction's records must be classified together. A path payment to someone else yields two events (a `trade` and a `payment_out`). Event id leg is a number for operation events and `e<n>` for effect events.
@@ -50,13 +55,14 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 
 ## Blockers
 - None. B1 (pnpm) resolved with D8.
-- CI: verified on 2026-11-07. The first push of each repo to GitHub ran `ci` (`actions/checkout@v4`, `pnpm/action-setup@v4` with pnpm 12, `actions/setup-node@v4`, Node 24) and it passed in all three package repos. The workflow files in the monorepo root `.github/workflows/` are now obsolete (the repos have their own `ci.yml`).
+- CI: verified on 2026-11-07. The first push of each repo to GitHub ran `ci` (`actions/checkout@v4`, `pnpm/action-setup@v4` with pnpm 12, `actions/setup-node@v4`, Node 24) and it passed in all three package repos, and again after the 6.1 changes. The workflow files in the monorepo root `.github/workflows/` are now obsolete (the repos have their own `ci.yml`).
 
 ## Environment notes
 - pnpm is installed in `C:\Users\Best\npm-global`, which is not on the user PATH. Prepend it per shell, or add it to PATH. In Git Bash, `pnpm build` of the web package failed with a path error; run web checks from PowerShell.
 - pnpm 12 blocks dependency install scripts until approved. Each package approves only `esbuild` in its own `pnpm-workspace.yaml` (core, api).
 - TypeScript is pinned to ~6.0.3 because typescript-eslint 8.72.1 supports <6.1.0 (TypeScript 7 does not work with it).
-- jsdom is pinned to ~30.1.3: 31.0.0 was published the same day and pnpm blocked it under its minimum-release-age policy. Do not bypass the minimum-release-age policy (a supply-chain guard); pin the previous version instead.
+- jsdom is pinned to ~30.1.3: 31.0.0 was published the same day and pnpm blocked it under its minimum-release-age policy. Do not bypass the minimum-release-age policy (a supply-chain guard); pin the previous version instead. One exception (D13): `ledgertax-api/pnpm-workspace.yaml` exempts exactly `@veronicdev/ledgertax-core@0.1.0`, our own package; pnpm added the entry itself during the switch. pnpm's default age is 1440 minutes, so the entry is unnecessary from 2026-11-08 and may be removed then; a future core release needs a new exact-version entry or a day's wait.
+- npm: the user's account `veronicdev` has 2FA enabled since 2026-11-07. Publishing asks for a browser confirmation, so the user runs `npm publish`; the agent prepares, dry-runs and verifies.
 - Git identity is global: VeronicDev <chrisjacobs2468@gmail.com> (set by the user). The first four commits (skeletons and meta) carry the old identity; the user said not to rewrite them.
 - `@types/node` (core, dev only) approved by the user on 2026-11-05. Also expected for api.
 - Dependencies added beyond the playbook list, as required companions: `@types/react`, `@types/react-dom`, `@testing-library/dom` (peer of `@testing-library/react`), `@eslint/js`. Accepted under the autonomy rules (companions of listed packages).
@@ -80,8 +86,9 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 | D8 | pnpm installed with `npm i -g pnpm`, approved by the user at Gate 0 | corepack enable needs admin |
 | D9 | Fiat math: scaled bigint, no library. Decided under D10 | See RESEARCH §7 |
 | D10 | User instruction (2026-11-06): override any playbook item that would hinder finishing every task from the current phase to the last. Applied as: playbook gates 1 and 2 are treated as passed, the Gate 1 data-model changes and an extra task 1.7 (`HorizonSource` in core) are approved, the playbook's allowed-dependency list is not a blocker. Wave boundaries (section 12) are kept because they are the product of Phase 5. **Not overridden** (they are in AGENTS.md): no secrets, testnet fixtures only, no publishing or deploying (Phase 6 needs the user's explicit yes), no paid or keyed services, no history rewrite, no machine installs, no deleting files the agent did not create | User wording was "override anything in the playbook" |
-| D11 | Interim D2: until core is published, the api consumes core through a packed tarball committed in `ledgertax-api/vendor/`, refreshed with a documented script. Switches to the semver range when the user publishes (Phase 6) | Keeps every folder buildable alone |
+| D11 | Interim D2: until core is published, the api consumes core through a packed tarball committed in `ledgertax-api/vendor/`, refreshed with a documented script. Switches to the semver range when the user publishes (Phase 6). **Superseded by D13 on 2026-11-07** | Keeps every folder buildable alone |
 | D12 | Publishing to GitHub (the user named the organisation `Ledger-Tax`, 2026-11-07). Four **private** repositories: `ledgertax-core`, `ledgertax-api`, `ledgertax-web`, and `ledger-tax` (AGENTS.md, PLAYBOOK.md, STATUS.md, README.md, docs/). Chosen by the user: private first, fresh history (one `chore: initial commit` per repo authored as VeronicDev, so the earlier git identity is not published), root docs in their own repo. Each repo was built from a clean copy of `git archive HEAD` of its folder and passed install, lint, typecheck, test and build on its own before the push. Additions made only in the copies: `.gitignore`, `.gitattributes` (LF), `.github/workflows/ci.yml`, links between packages rewritten from relative paths to repo URLs. **The monorepo working copy was not changed to match and is no longer the place to make changes**: further work goes into the org repositories. A staging folder `_publish/` (git-excluded) holds the clones used for the push | Realises the split the playbook planned. The monorepo's own history is untouched |
+| D13 | npm name `@veronicdev/ledgertax-core`, the user's personal scope (the user chose it over creating an `@ledger-tax` npm organisation, 2026-11-07). 0.1.0 published from the `ledgertax-core` repository and tagged `v0.1.0`; the api uses `^0.1.0` and D11's vendored tarball is deleted. The api's `pnpm-workspace.yaml` exempts exactly `@veronicdev/ledgertax-core@0.1.0` from pnpm's minimum-release-age check | The age check guards against freshly published third-party packages. This entry covers only our own build, whose integrity hash was checked against the local tarball; every other package stays guarded |
 | D3 | The api is stateless about personal data: labels and prices travel with each request or live in the browser. Public chain history may be cached | Privacy. Linking an address to a person is sensitive |
 | D4 | MVP prices come from a user-supplied CSV, no external price API | Avoids keys, licensing and rate limits in the first release |
 | D5 | MVP cost-basis method is FIFO only | Other methods are Wave issues |

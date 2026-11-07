@@ -4,9 +4,9 @@ Turns the public history of Stellar addresses into classified events, FIFO cost-
 
 **Accounting export, not tax advice.** Tax rules differ by country, classification can be wrong, and a wrong price gives a wrong result.
 
-**Status:** early, working end to end on testnet; not published and not deployed. The tool is read-only: it never holds keys or sends transactions. See [docs/DEMO.md](docs/DEMO.md) for what was verified and what was not.
+**Status:** early, working end to end on testnet. The core library is published to npm as [`@veronicdev/ledgertax-core`](https://www.npmjs.com/package/@veronicdev/ledgertax-core); the api and web app are not deployed. The tool is read-only: it never holds keys or sends transactions. See [docs/DEMO.md](docs/DEMO.md) for what was verified and what was not.
 
-## Packages (future repos)
+## Packages
 
 | Folder | Purpose | Check |
 |---|---|---|
@@ -54,6 +54,7 @@ Dependency direction: core, then api, then web. Never the reverse.
 | [docs/RESEARCH.md](docs/RESEARCH.md) | What data sources exist and what was verified about them |
 | [docs/DEMO.md](docs/DEMO.md) | End-to-end run and the independent check of the gains |
 | [docs/WAVE_APPLICATION.md](docs/WAVE_APPLICATION.md) | Checklist for you before publishing |
+| [docs/USER_ACTIONS.md](docs/USER_ACTIONS.md) | The remaining steps only you can do, in order |
 
 ## For an agent starting work
 
