@@ -1,0 +1,14 @@
+# Accounting export, not tax advice.
+# Generated: 2026-11-06T22:55:23.153Z
+# Address: GCIINRBMEA2NGR46LMT5WWJNGVA242YSTV2ALU57CQIDOHL2CQSUJKYR
+# Source: Horizon (https://horizon-testnet.stellar.org), network "Test SDF Network ; September 2015"
+# History range: ledgers 128 to 5596381, the history this server still holds; anything older is not included and may affect cost basis
+# Method: FIFO. Currency: USD. Prices: supplied by the user.
+# Total gain of the ok rows: 48.00 USD (sum of unrounded values; rows are rounded individually)
+# Rows with status error: 1. They are not included in any total.
+status,acquired_date,disposed_date,asset,quantity,proceeds,cost_basis,gain,holding_days,currency,event_ids,note
+ok,2026-11-06,2026-11-06,native,100.0000000,10.00,10.00,0.00,0,USD,c4a90e15ba0674dd0856c3f75800f8ca6a639f967cab77593b1503c294dc99fd:0:0 568445431ff579472fe5ca07e3ff7766fc5a9727abcd7593532b000b1ebbb5e1:0:0,
+ok,2026-11-06,2026-11-06,native,30.0000000,30.00,3.00,27.00,0,USD,15a4dcea123d874fba9ddac64e71a32650c1ec3ed86d8193bc6ddab164d397a2:0:e1 568445431ff579472fe5ca07e3ff7766fc5a9727abcd7593532b000b1ebbb5e1:0:0,
+ok,2026-11-06,2026-11-06,native,10.0000000,15.00,1.00,14.00,0,USD,f4a7c5d1e1065b40e8522c813c35f7f4f14a9760cf242d5e5a93fbd1dee84699:0:e3 568445431ff579472fe5ca07e3ff7766fc5a9727abcd7593532b000b1ebbb5e1:0:0,
+ok,2026-11-06,2026-11-06,native,5.0000000,7.50,0.50,7.00,0,USD,39dedd14e88554657d4bfd8faee08486ea4690aea65699df779e15f46d06c949:0:e3 568445431ff579472fe5ca07e3ff7766fc5a9727abcd7593532b000b1ebbb5e1:0:0,
+error,,2026-11-06,TEST:GAJTAXBFXHV6OYBEJVOJYTRHJFYERKML6POTWPHL6FYOWHANJZ2IVIAC,40.0000000,,,,,,d1398a7bf73414467e2df8bcbdac175789b58ca1fbbb2eacb11d208ddaf88a99:0:e2,unknown_cost_basis: The cost basis of 400000000 smallest units of TEST:GAJTAXBFXHV6OYBEJVOJYTRHJFYERKML6POTWPHL6FYOWHANJZ2IVIAC is unknown (they arrived by a plain payment or transfer). Label the incoming payment as income if it was income.
