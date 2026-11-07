@@ -27,7 +27,7 @@ This is a checklist **for you**. The agent does not apply to anything on your be
 - [x] **Passing CI** on the default branch: yes for all three on 2026-11-07. Re-check after every change.
 - [ ] **Licence**: MIT is in each package (`LICENSE`, copyright "Stellar Ledger Tax contributors"). Change the holder if you want a name.
 - [x] **CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md, issue templates, PR template**: present. Security and conduct contact filled in on 2026-11-07 (chrisjacobs2468@gmail.com).
-- [ ] **4 to 6 scoped issues** created from `docs/wave-issues/<package>.md`: core has 5, api has 5, web has 4. Create them in the repository and label them. Each names a marker you can find with `git grep "WAVE-ISSUE"`.
+- [x] **4 to 6 scoped issues**: created on 2026-11-07 (core 5, api 5, web 4), labelled `wave` and `complexity: ...`, written to the Drips guide "Creating Meaningful Issues". Each names its marker (`git grep "WAVE-ISSUE"`) where one exists. How to apply and add them to a Wave: `docs/USER_ACTIONS.md` step 3b.
 - [ ] **Clear scope per repository**: core classifies, api calculates and serves, web is the interface (the dependency direction is core, then api, then web).
 - [ ] No secrets in any history: search for `S` followed by 55 base32 characters, `.env` files and key files before publishing. (None were committed; `.env.example` files have empty values.)
 

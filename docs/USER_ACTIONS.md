@@ -27,9 +27,18 @@ Wave needs public repositories. Do this after step 1. Also decide whether `docs/
 - Right after that, the agent turns on the branch rule in `docs/github-ruleset-main.json` for the three package repositories (`gh api -X POST repos/Ledger-Tax/<repo>/rulesets --input docs/github-ruleset-main.json`): changes to `main` only through a pull request whose `check` CI job passed, no force-push, no deletion. GitHub refuses this rule on private repositories of a free organisation, which is why it waits for this step.
 - Recommended on GitHub: organisation **Settings**, **Actions**, **General**, "Approval for running fork pull request workflows": choose approval for all outside collaborators, so a stranger's pull request cannot run code in CI until you have read it.
 
-## 3. Wave issues
+## 3. Wave issues: done (2026-11-07)
 
-Tell the agent: "create the Wave issues". It creates the issues drafted in `docs/wave-issues/` (core 5, api 5, web 4) in the three repositories, with labels.
+14 issues created from `docs/wave-issues/` (core #1 to #5, api #1 to #5, web #1 to #4), each labelled `wave` and `complexity: trivial|medium|high`. They follow the Drips guide "Creating Meaningful Issues": why it matters, what done looks like, implementation guidance, how it will be reviewed (PR must say `Closes #N`), and "comment and get assigned before starting". The complexity you set in the Wave app when adding each issue should match its label: Trivial 100, Medium 150, High 200 points.
+
+## 3b. Apply to the Wave (only you)
+
+From the Drips docs (read 2026-11-07; check the current pages before applying):
+
+1. Sign in to the Wave app at https://www.drips.network/wave, open **Maintainers**, **Orgs and Repos**, and install the "Drips Wave GitHub App" on the `Ledger-Tax` organisation.
+2. Sync the three package repositories and apply them to the Wave program (for example the Stellar Wave).
+3. After approval, add the issues under **Maintainers**, **Issues** and set each one's complexity. The `Stellar Wave` label works only after the repository is approved; do not add it before.
+4. Limits: a program may cap applications per user and per organisation per cycle, and rejected applications still count. A rejected repository cannot simply be re-applied; appeals go only through the app (first after two weeks, at most three per repository).
 
 ## 4. Deploy the api and the web app (Phase 6.2)
 
