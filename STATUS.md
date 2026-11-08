@@ -45,7 +45,7 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 ## Next
 - 6.2 deploy: needs the user's choice of host and the accounts (`docs/USER_ACTIONS.md` step 4). The api README already documents its env vars, limits and `/health`; host-specific steps are written once the host is known, then the agent deploys and updates each README status.
 - User tasks in `docs/USER_ACTIONS.md`: the Wave application in the Drips app, the organisation's fork-PR approval setting, merging api PR #6.
-- Remove the api's pnpm exception for `@veronicdev/ledgertax-core@0.1.0` (via a pull request) from 2026-11-08 11:00 UTC; it failed before then because pnpm counts a full 24 hours from the publish time.
+- 2026-11-08: core 0.1.1 published (documentation only; core PR #6 merged by the user, tag `v0.1.1`, registry shasum equals the local build). npm also lists `0.0.0-stage`, a placeholder npm created itself for staged publishing (2 files, no code). Api PR #6 removes the pnpm age exception for core 0.1.0 (CI passed; waiting for the user to merge). A first attempt at 01:04 UTC failed because pnpm counts a full 24 hours from the publish time.
 - Optional: name a real public address to compare against a spreadsheet (task 4.1 second half).
 
 ## Gate 1 items (resolved under D10; kept for the record)
