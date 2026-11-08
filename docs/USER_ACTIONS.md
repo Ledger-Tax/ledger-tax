@@ -65,7 +65,7 @@ Tell the agent: "deploy the api to <host> and the web app to <host>; I am logged
 
 ## Optional
 
-- **Core 0.1.1:** the README shown on npmjs.com for 0.1.0 still says "not published". Tell the agent "release core 0.1.1"; it bumps the version, updates the changelog and dry-runs. You then run `npm publish` in `_publish\ledgertax-core` and confirm in the browser. The api can take the new version a day later (pnpm's minimum release age) or through an exact-version exception like the one for 0.1.0.
+- [x] **Core 0.1.1:** published on 2026-11-08 (documentation only, via PR #6, tagged `v0.1.1`). npm also lists `0.0.0-stage`, a placeholder npm created itself for staged publishing (no code); `latest` is 0.1.1.
 - **A real address of yours** for the spreadsheet comparison in task 4.1. Tell the agent the public address; its history is not committed.
 - **A person's keyboard and screen-reader pass** of the web app.
 - **The Wave application** itself: follow `docs/WAVE_APPLICATION.md`. The agent does not apply for you.

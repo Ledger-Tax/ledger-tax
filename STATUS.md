@@ -44,8 +44,9 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 
 ## Next
 - 6.2 deploy: needs the user's choice of host and the accounts (`docs/USER_ACTIONS.md` step 4). The api README already documents its env vars, limits and `/health`; host-specific steps are written once the host is known, then the agent deploys and updates each README status.
-- User tasks in `docs/USER_ACTIONS.md`: maintainer contacts, going public, Wave issues.
-- Optional: release core 0.1.1 so the README shown on npmjs.com is current (the 0.1.0 README still says "not published"); name a real public address to compare against a spreadsheet (task 4.1 second half).
+- User tasks in `docs/USER_ACTIONS.md`: the Wave application in the Drips app, the organisation's fork-PR approval setting, merging api PR #6.
+- Remove the api's pnpm exception for `@veronicdev/ledgertax-core@0.1.0` (via a pull request) from 2026-11-08 11:00 UTC; it failed before then because pnpm counts a full 24 hours from the publish time.
+- Optional: name a real public address to compare against a spreadsheet (task 4.1 second half).
 
 ## Gate 1 items (resolved under D10; kept for the record)
 1. **Data model changes from the playbook proposal** (they need sign-off): `LedgerEvent` gained `opType?` (source operation type, always set on `unknown`) and `direction?: 'in' | 'out'` (set on `account_merged` only). The fee event has `opIndex` -1. `classifyRecord` became `classifyTransaction(records, ctx)` because merge amounts and trade fills live in effect records, so a transaction's records must be classified together. A path payment to someone else yields two events (a `trade` and a `payment_out`). Event id leg is a number for operation events and `e<n>` for effect events.
