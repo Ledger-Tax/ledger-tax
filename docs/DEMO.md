@@ -50,4 +50,4 @@ First request for this address (cold cache): about 2 seconds on this run, 14 sec
 - Only FIFO, only a user-supplied price CSV, only the two CSV formats.
 - The public SDF Horizon keeps about one year; older history is missing and the report says which ledger range the server holds.
 - Verification limits: a human keyboard-only and screen-reader walkthrough was **not** done (only automated checks and the Tab presses above); only desktop Chrome was used, at one window width; no Firefox, Safari or phone layout checks.
-- The CI workflows have never run (no remote repository), and nothing has been published or deployed.
+- At the time of this run nothing was published or deployed. Since then (2026-11-08): `ledgertax-core` is published to npm as `@veronicdev/ledgertax-core`, and CI runs on every pull request and every push to `main` in the three package repositories. The api and web app are still not deployed; the steps above are how to run them locally.
