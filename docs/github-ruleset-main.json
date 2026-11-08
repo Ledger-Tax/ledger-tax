@@ -49,6 +49,9 @@
           },
           {
             "context": "analyze"
+          },
+          {
+            "context": "malware-scan"
           }
         ]
       }
