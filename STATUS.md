@@ -44,8 +44,8 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 
 ## Next
 - 6.2 deploy: needs the user's choice of host and the accounts (`docs/USER_ACTIONS.md` step 4). The api README already documents its env vars, limits and `/health`; host-specific steps are written once the host is known, then the agent deploys and updates each README status.
-- User tasks in `docs/USER_ACTIONS.md`: the Wave application in the Drips app, the organisation's fork-PR approval setting, merging api PR #6.
-- 2026-11-08: core 0.1.1 published (documentation only; core PR #6 merged by the user, tag `v0.1.1`, registry shasum equals the local build). npm also lists `0.0.0-stage`, a placeholder npm created itself for staged publishing (2 files, no code). Api PR #6 removes the pnpm age exception for core 0.1.0 (CI passed; waiting for the user to merge). A first attempt at 01:04 UTC failed because pnpm counts a full 24 hours from the publish time.
+- User tasks in `docs/USER_ACTIONS.md`: the Wave application in the Drips app, the organisation's fork-PR approval setting.
+- 2026-11-08: core 0.1.1 published (documentation only; core PR #6 merged by the user, tag `v0.1.1`, registry shasum equals the local build). npm also lists `0.0.0-stage`, a placeholder npm created itself for staged publishing (2 files, no code). Api PR #6 removes the pnpm age exception for core 0.1.0 (merged by the user as `03fce58`; CI passed on main). A first attempt at 01:04 UTC failed because pnpm counts a full 24 hours from the publish time.
 - Optional: name a real public address to compare against a spreadsheet (task 4.1 second half).
 
 ## Gate 1 items (resolved under D10; kept for the record)
@@ -62,7 +62,7 @@ Phases 0 to 5 complete. Gates 1 and 2 were treated as passed under D10 (the user
 - pnpm is installed in `C:\Users\Best\npm-global`, which is not on the user PATH. Prepend it per shell, or add it to PATH. In Git Bash, `pnpm build` of the web package failed with a path error; run web checks from PowerShell.
 - pnpm 12 blocks dependency install scripts until approved. Each package approves only `esbuild` in its own `pnpm-workspace.yaml` (core, api).
 - TypeScript is pinned to ~6.0.3 because typescript-eslint 8.72.1 supports <6.1.0 (TypeScript 7 does not work with it).
-- jsdom is pinned to ~30.1.3: 31.0.0 was published the same day and pnpm blocked it under its minimum-release-age policy. Do not bypass the minimum-release-age policy (a supply-chain guard); pin the previous version instead. One exception (D13): `ledgertax-api/pnpm-workspace.yaml` exempts exactly `@veronicdev/ledgertax-core@0.1.0`, our own package; pnpm added the entry itself during the switch. pnpm's default age is 1440 minutes, so the entry is unnecessary from 2026-11-08 and may be removed then; a future core release needs a new exact-version entry or a day's wait.
+- jsdom is pinned to ~30.1.3: 31.0.0 was published the same day and pnpm blocked it under its minimum-release-age policy. Do not bypass the minimum-release-age policy (a supply-chain guard); pin the previous version instead. A temporary exception (D13) for exactly `@veronicdev/ledgertax-core@0.1.0` was removed on 2026-11-08 (api PR #6); no exceptions remain. pnpm's default age is 1440 minutes, so after a future core release the api can take the new version a day later.
 - npm: the user's account `veronicdev` has 2FA enabled since 2026-11-07. Publishing asks for a browser confirmation, so the user runs `npm publish`; the agent prepares, dry-runs and verifies.
 - Git identity is global: VeronicDev <chrisjacobs2468@gmail.com> (set by the user). The first four commits (skeletons and meta) carry the old identity; the user said not to rewrite them.
 - `@types/node` (core, dev only) approved by the user on 2026-11-05. Also expected for api.
